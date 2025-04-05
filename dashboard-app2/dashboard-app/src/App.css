@@ -1,0 +1,6 @@
+.custom-progress::-webkit-progress-value {
+  background-color: var(--progress-color);
+}
+.custom-progress::-moz-progress-bar {
+  background-color: var(--progress-color);
+}
