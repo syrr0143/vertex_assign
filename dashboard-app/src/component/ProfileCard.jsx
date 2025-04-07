@@ -4,7 +4,7 @@ import { CheckCircle } from "lucide-react";
 
 export default function ProfileCard({ mobile = false }) {
   return (
-    <div className="bg-[#111] rounded-lg p-6 mb-6">
+    <div className="bg-[#111] rounded-lg p-6 mb-6 border border-gray-500 ">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
         <div className="w-24 h-24 justify-center bg-[#222] rounded-lg overflow-hidden flex items-center justify-center">
           <User className="w-24 h-24  text-gray-400" strokeWidth={1.5} />

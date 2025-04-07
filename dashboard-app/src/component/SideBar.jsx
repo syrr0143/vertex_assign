@@ -1,12 +1,24 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, Plus } from "lucide-react";
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const menuItems = [
+    { label: "Dashboard", path: "/" },
+    { label: "Analytics", path: "/analytics" },
+    { label: "Connect", path: "/connect" },
+    { label: "Dealroom", path: "/dealroom" },
+    { label: "Profile", path: "/profile" },
+    { label: "Settings", path: "/settings" },
+  ];
 
   return (
     <div
-      className={`max-h-screen flex flex-col ${
+      className={`fixed top-0 left-0 h-screen flex flex-col bg-black z-40 ${
         collapsed ? "w-16" : "w-52"
       } transition-all duration-300`}
     >
@@ -28,7 +40,6 @@ export default function Sidebar() {
                 stroke="black"
                 strokeWidth="2"
               />
-
               <polygon points="50,20 30,60 50,50 70,60" fill="black" />
               <polygon points="50,50 45,70 55,70" fill="black" />
             </svg>
@@ -38,7 +49,7 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-      {/* Thin sidebar with toggle button */}
+
       <div className="flex flex-row h-full">
         <div className="w-16 bg-black border-r border-gray-800 flex justify-between flex-col items-center py-4">
           <div>
@@ -48,40 +59,31 @@ export default function Sidebar() {
                 alt="Profile"
               />
             </div>
-            {/* <div className="w-full p-0 h-px bg-gray-700 mt-2"></div> */}
           </div>
           <button className="w-8 h-8 rounded-full border border-gray-800 flex items-center justify-center">
             <Plus size={16} className="text-white" />
           </button>
         </div>
 
-        {/* Expanded sidebar */}
         {!collapsed && (
           <div className="bg-black w-48 border-r border-gray-800 flex flex-col">
-            {/* <div className="p-4">
-            <h1 className="text-white font-semibold text-lg">Vertxlabs, Inc</h1>
-          </div> */}
             <nav className="flex-1">
-              {[
-                { label: "Dashboard" },
-                { label: "Analytics", active: true },
-                { label: "Connect" },
-                { label: "Dealroom" },
-                { label: "Profile" },
-                { label: "Settings" },
-              ].map((item) => (
-                <a
-                  key={item.label}
-                  href="#"
-                  className={`flex items-center px-4 py-3 ${
-                    item.active
-                      ? " text-white"
-                      : "text-gray-400 hover:bg-gray-900"
-                  }`}
-                >
-                  <span>{item.label}</span>
-                </a>
-              ))}
+              {menuItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => navigate(item.path)}
+                    className={`w-full text-left flex items-center px-4 py-3 ${
+                      isActive
+                        ? "text-white bg-gray-900"
+                        : "text-gray-400 hover:bg-gray-800"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
             </nav>
           </div>
         )}
