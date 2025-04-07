@@ -2,7 +2,7 @@
 export default function Experience({ mobile = false }) {
  
   return (
-    <div className="bg-[#111] border border-gray-500 rounded-lg p-6 w-full h-full">
+    <div className="bg-black border border-gray-500 rounded-lg p-6 w-full h-full">
       <h3 className="text-3xl font-bold mb-4">Experience</h3>
       <div className="text-4xl font-bold ">03</div>
       <div className="mt-8 space-y-4">
